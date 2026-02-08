@@ -72,4 +72,9 @@ Public Class FrmMain
         f.ShowDialog()
         LoadDashboardStats() ' Refresh the "Total Customers" count when you return
     End Sub
+    Private Sub tileRentals_Click(sender As Object, e As EventArgs) Handles tileRentals.Click
+        Dim f As New FrmRental()
+        f.ShowDialog()
+        LoadDashboardStats() ' Refresh stats (Car count will drop by 1!)
+    End Sub
 End Class
