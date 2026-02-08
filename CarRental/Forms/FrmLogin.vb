@@ -35,42 +35,54 @@ Public Class FrmLogin
     ' LOGIN BUTTON - Main Authentication
     ' ==========================================
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        ' Validation
-        If Not ValidateInputs() Then
+        If txtUser.Text = "" Or txtPass.Text = "" Then
+            MsgBox("Please enter Username/Email and Password", MsgBoxStyle.Exclamation)
             Return
         End If
 
         Try
-            ' Sanitize inputs to prevent SQL injection (basic version)
-            Dim username As String = txtUser.Text.Trim().Replace("'", "''")
-            Dim password As String = txtPass.Text.Trim().Replace("'", "''")
+            ' 1. CHECK ADMIN LOGIN (Table: tbl_users)
+            ' Admins still use their "username" (e.g., 'admin')
+            Dim queryAdmin As String = "SELECT * FROM tbl_users WHERE username='" & txtUser.Text & "' AND password='" & txtPass.Text & "'"
+            Dim dtAdmin As DataTable = DatabaseConnection.RunQuery(queryAdmin)
 
-            ' Database authentication
-            Dim query As String = "SELECT * FROM tbl_users WHERE username='" & username & "' AND password='" & password & "'"
-            Dim dt As DataTable = DatabaseConnection.RunQuery(query)
+            If dtAdmin.Rows.Count > 0 Then
+                ' ADMIN FOUND
+                UserSession.CurrentUserID = 0
+                UserSession.CurrentUserName = "Administrator"
 
-            If dt.Rows.Count > 0 Then
-                ' Login successful
-                MsgBox("✓ Login Successful!" & vbCrLf & "Welcome back, " & username & "!", MsgBoxStyle.Information, "Success")
+                MsgBox("Welcome Admin!", MsgBoxStyle.Information)
+                Dim f As New FrmMain()
+                f.Show()
+                Me.Hide()
+                Return ' Stop here so we don't check customers
+            End If
 
-                ' Open main dashboard
-                Dim mainForm As New FrmMain()
-                mainForm.Show()
+            ' 2. CHECK CUSTOMER LOGIN (Table: tbl_customers)
+            ' FIX: We now check the 'email' column instead of 'cust_name'
+            Dim queryCust As String = "SELECT * FROM tbl_customers WHERE email='" & txtUser.Text & "' AND password='" & txtPass.Text & "'"
+            Dim dtCust As DataTable = DatabaseConnection.RunQuery(queryCust)
 
-                ' Hide login form
+            If dtCust.Rows.Count > 0 Then
+                ' CUSTOMER FOUND
+                UserSession.CurrentUserID = Convert.ToInt32(dtCust.Rows(0)("cust_id"))
+                UserSession.CurrentUserName = dtCust.Rows(0)("cust_name").ToString()
+
+                MsgBox("Welcome " & UserSession.CurrentUserName, MsgBoxStyle.Information)
+
+                Dim f As New FrmUserDashboard()
+                '  userId:=Convert.ToInt32(dtCust.Rows(0)("cust_id")),
+                ' userEmail:=dtCust.Rows(0)("email").ToString(),
+                'userName:=dtCust.Rows(0)("cust_name").ToString()
+                f.Show()
                 Me.Hide()
             Else
-                ' Login failed
-                MsgBox("❌ Invalid username or password." & vbCrLf & vbCrLf & "Please check your credentials and try again.", MsgBoxStyle.Critical, "Login Failed")
-
-                ' Clear password field for security
-                txtPass.Text = ""
-                txtPass.Focus()
+                ' NEITHER FOUND
+                MsgBox("Invalid Email/Username or Password.", MsgBoxStyle.Critical)
             End If
 
         Catch ex As Exception
-            ' Handle any errors
-            MsgBox("System Error: " & ex.Message & vbCrLf & vbCrLf & "Please contact the administrator if this problem persists.", MsgBoxStyle.Critical, "Error")
+            MsgBox("Login Error: " & ex.Message)
         End Try
     End Sub
 
@@ -182,4 +194,9 @@ Public Class FrmLogin
         End If
     End Sub
 
+    Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
+        Dim f As New FrmRegister()
+        f.Show()
+        Me.Hide()
+    End Sub
 End Class

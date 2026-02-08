@@ -157,6 +157,12 @@
     <Compile Include="Forms\FrmCustomers.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FrmRegister.Designer.vb">
+      <DependentUpon>FrmRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FrmRental.Designer.vb">
       <DependentUpon>FrmRental.vb</DependentUpon>
     </Compile>
@@ -175,13 +181,26 @@
     <Compile Include="Forms\FrmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FrmRequests.Designer.vb">
+      <DependentUpon>FrmRequests.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmRequests.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FrmReturn.Designer.vb">
       <DependentUpon>FrmReturn.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmReturn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FrmUserDashboard.Designer.vb">
+      <DependentUpon>FrmUserDashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmUserDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\DatabaseConnection.vb" />
+    <Compile Include="Modules\UserSession.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -215,11 +234,20 @@
     <EmbeddedResource Include="Forms\FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmRegister.resx">
+      <DependentUpon>FrmRegister.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmRental.resx">
       <DependentUpon>FrmRental.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmRequests.resx">
+      <DependentUpon>FrmRequests.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmReturn.resx">
       <DependentUpon>FrmReturn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmUserDashboard.resx">
+      <DependentUpon>FrmUserDashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

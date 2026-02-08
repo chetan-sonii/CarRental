@@ -33,9 +33,10 @@ Partial Class FrmLogin
         Me.PoisonLabel2 = New ReaLTaiizor.Controls.PoisonLabel()
         Me.lblSubtitle = New ReaLTaiizor.Controls.PoisonLabel()
         Me.PoisonPanel1 = New ReaLTaiizor.Controls.PoisonPanel()
+        Me.chkShowPassword = New ReaLTaiizor.Controls.PoisonCheckBox()
         Me.btnExit = New ReaLTaiizor.Controls.PoisonButton()
         Me.PoisonLabel3 = New ReaLTaiizor.Controls.PoisonLabel()
-        Me.chkShowPassword = New ReaLTaiizor.Controls.PoisonCheckBox()
+        Me.btnRegister = New ReaLTaiizor.Controls.PoisonLinkLabel()
         CType(Me.PoisonStyleManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PoisonPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -47,13 +48,13 @@ Partial Class FrmLogin
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.lblTitle.Location = New System.Drawing.Point(182, 90)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(236, 19)
+        Me.lblTitle.Size = New System.Drawing.Size(220, 19)
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "🚗 Car Rental Management System"
         Me.lblTitle.UseCustomForeColor = True
-        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
         '
         'txtUser
         '
@@ -74,6 +75,7 @@ Partial Class FrmLogin
         Me.txtUser.MaxLength = 50
         Me.txtUser.Name = "txtUser"
         Me.txtUser.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtUser.PromptText = "Enter your username"
         Me.txtUser.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtUser.SelectedText = ""
         Me.txtUser.SelectionLength = 0
@@ -105,6 +107,7 @@ Partial Class FrmLogin
         Me.txtPass.MaxLength = 50
         Me.txtPass.Name = "txtPass"
         Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPass.PromptText = "Enter your password"
         Me.txtPass.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtPass.SelectedText = ""
         Me.txtPass.SelectionLength = 0
@@ -159,13 +162,14 @@ Partial Class FrmLogin
         Me.lblSubtitle.AutoSize = True
         Me.lblSubtitle.Location = New System.Drawing.Point(213, 116)
         Me.lblSubtitle.Name = "lblSubtitle"
-        Me.lblSubtitle.Size = New System.Drawing.Size(175, 19)
+        Me.lblSubtitle.Size = New System.Drawing.Size(174, 19)
         Me.lblSubtitle.TabIndex = 7
         Me.lblSubtitle.Text = "Please login to your account"
         '
         'PoisonPanel1
         '
         Me.PoisonPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PoisonPanel1.Controls.Add(Me.btnRegister)
         Me.PoisonPanel1.Controls.Add(Me.chkShowPassword)
         Me.PoisonPanel1.Controls.Add(Me.btnExit)
         Me.PoisonPanel1.Controls.Add(Me.PoisonLabel1)
@@ -185,6 +189,16 @@ Partial Class FrmLogin
         Me.PoisonPanel1.VerticalScrollbarHighlightOnWheel = False
         Me.PoisonPanel1.VerticalScrollbarSize = 10
         '
+        'chkShowPassword
+        '
+        Me.chkShowPassword.AutoSize = True
+        Me.chkShowPassword.Location = New System.Drawing.Point(25, 190)
+        Me.chkShowPassword.Name = "chkShowPassword"
+        Me.chkShowPassword.Size = New System.Drawing.Size(105, 15)
+        Me.chkShowPassword.TabIndex = 6
+        Me.chkShowPassword.Text = "Show Password"
+        Me.chkShowPassword.UseSelectable = True
+        '
         'btnExit
         '
         Me.btnExit.Location = New System.Drawing.Point(25, 276)
@@ -197,23 +211,23 @@ Partial Class FrmLogin
         'PoisonLabel3
         '
         Me.PoisonLabel3.AutoSize = True
+        Me.PoisonLabel3.ForeColor = System.Drawing.Color.Gray
         Me.PoisonLabel3.Location = New System.Drawing.Point(170, 500)
         Me.PoisonLabel3.Name = "PoisonLabel3"
-        Me.PoisonLabel3.Size = New System.Drawing.Size(260, 19)
+        Me.PoisonLabel3.Size = New System.Drawing.Size(279, 19)
         Me.PoisonLabel3.TabIndex = 9
         Me.PoisonLabel3.Text = "© 2026 Car Rental System. All rights reserved."
         Me.PoisonLabel3.UseCustomForeColor = True
-        Me.PoisonLabel3.ForeColor = System.Drawing.Color.Gray
         '
-        'chkShowPassword
+        'btnRegister
         '
-        Me.chkShowPassword.AutoSize = True
-        Me.chkShowPassword.Location = New System.Drawing.Point(25, 190)
-        Me.chkShowPassword.Name = "chkShowPassword"
-        Me.chkShowPassword.Size = New System.Drawing.Size(109, 15)
-        Me.chkShowPassword.TabIndex = 6
-        Me.chkShowPassword.Text = "Show Password"
-        Me.chkShowPassword.UseSelectable = True
+        Me.btnRegister.Location = New System.Drawing.Point(150, 190)
+        Me.btnRegister.Name = "btnRegister"
+        Me.btnRegister.Size = New System.Drawing.Size(135, 23)
+        Me.btnRegister.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Blue
+        Me.btnRegister.TabIndex = 7
+        Me.btnRegister.Text = "New User? Register"
+        Me.btnRegister.UseSelectable = True
         '
         'FrmLogin
         '
@@ -226,12 +240,9 @@ Partial Class FrmLogin
         Me.Controls.Add(Me.lblTitle)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Movable = True
         Me.Name = "FrmLogin"
-        Me.Padding = New System.Windows.Forms.Padding(20, 60, 20, 20)
         Me.Resizable = False
         Me.ShadowType = ReaLTaiizor.[Enum].Poison.FormShadowType.AeroShadow
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login - Car Rental System"
         CType(Me.PoisonStyleManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PoisonPanel1.ResumeLayout(False)
@@ -254,4 +265,5 @@ Partial Class FrmLogin
     Friend WithEvents btnExit As ReaLTaiizor.Controls.PoisonButton
     Friend WithEvents PoisonLabel3 As ReaLTaiizor.Controls.PoisonLabel
     Friend WithEvents chkShowPassword As ReaLTaiizor.Controls.PoisonCheckBox
+    Friend WithEvents btnRegister As ReaLTaiizor.Controls.PoisonLinkLabel
 End Class
