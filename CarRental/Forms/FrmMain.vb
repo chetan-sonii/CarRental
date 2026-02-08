@@ -10,27 +10,32 @@ Public Class FrmMain
     Private ReadOnly tileCust As Object
 
     ' 1. CONSTRUCTOR: This runs BEFORE the form opens
+    Private _styleManager As PoisonStyleManager
+
     Public Sub New()
         InitializeComponent()
 
-        ' SAFETY CHECK: Force the StyleManager to recognize the form
-        If Me.PoisonStyleManager1 Is Nothing Then
-            Me.PoisonStyleManager1 = New PoisonStyleManager(Me)
-        End If
+        ' 2. CREATE IT MANUALLY IN CODE
+        ' This bypasses the "Requested value 'none'" error
+        _styleManager = New PoisonStyleManager(Me)
 
-        ' FORCE THEME: This prevents "None" errors
-        Me.PoisonStyleManager1.Owner = Me
-        Me.PoisonStyleManager1.Theme = PoisonThemeStyle.Light
-        Me.PoisonStyleManager1.Style = PoisonColorStyle.Blue
+        ' 3. FORCE THE SETTINGS
+        _styleManager.Style = ColorStyle.Blue
+        _styleManager.Theme = ThemeStyle.Light
 
-        ' Assign it to the form
-        Me.StyleManager = Me.PoisonStyleManager1
+        ' 4. ASSIGN TO FORM
+        Me.StyleManager = _styleManager
     End Sub
 
     Public ReadOnly Property PoisonColorStyle As Object
 
     ' 2. LOAD EVENT: Fetch the data
     Private Sub FrmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Just to be double safe, set it again on load
+        If Me.StyleManager Is Nothing Then
+            Me.StyleManager = _styleManager
+        End If
+
         LoadDashboardStats()
     End Sub
 

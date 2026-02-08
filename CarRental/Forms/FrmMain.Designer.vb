@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmMain
     Inherits ReaLTaiizor.Forms.PoisonForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,8 @@ Partial Class FrmMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.PoisonStyleManager1 = New ReaLTaiizor.Manager.PoisonStyleManager(Me.components)
         Me.PoisonTabControl1 = New ReaLTaiizor.Controls.PoisonTabControl()
         Me.tabDashboard = New ReaLTaiizor.Controls.PoisonTabPage()
         Me.btnlogout = New ReaLTaiizor.Controls.PoisonButton()
@@ -33,14 +31,9 @@ Partial Class FrmMain
         Me.tabCars = New ReaLTaiizor.Controls.PoisonTabPage()
         Me.tabCustomers = New ReaLTaiizor.Controls.PoisonTabPage()
         Me.tabRentals = New ReaLTaiizor.Controls.PoisonTabPage()
-        CType(Me.PoisonStyleManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PoisonTabControl1.SuspendLayout()
         Me.tabDashboard.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'PoisonStyleManager1
-        '
-        Me.PoisonStyleManager1.Owner = Me
         '
         'PoisonTabControl1
         '
@@ -170,7 +163,6 @@ Partial Class FrmMain
         Me.Controls.Add(Me.PoisonTabControl1)
         Me.Name = "FrmMain"
         Me.Text = "FrmMain"
-        CType(Me.PoisonStyleManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PoisonTabControl1.ResumeLayout(False)
         Me.tabDashboard.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -185,5 +177,4 @@ Partial Class FrmMain
     Friend WithEvents PoisonTile1 As ReaLTaiizor.Controls.PoisonTile
     Friend WithEvents tileRentals As ReaLTaiizor.Controls.PoisonTile
     Friend WithEvents btnlogout As ReaLTaiizor.Controls.PoisonButton
-    Public WithEvents PoisonStyleManager1 As ReaLTaiizor.Manager.PoisonStyleManager
 End Class

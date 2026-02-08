@@ -22,8 +22,6 @@ Partial Class FrmLogin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.PoisonStyleManager1 = New ReaLTaiizor.Manager.PoisonStyleManager(Me.components)
         Me.lblTitle = New ReaLTaiizor.Controls.PoisonLabel()
         Me.txtUser = New ReaLTaiizor.Controls.PoisonTextBox()
         Me.txtPass = New ReaLTaiizor.Controls.PoisonTextBox()
@@ -31,12 +29,7 @@ Partial Class FrmLogin
         Me.btnClear = New ReaLTaiizor.Controls.PoisonButton()
         Me.PoisonLabel1 = New ReaLTaiizor.Controls.PoisonLabel()
         Me.PoisonLabel2 = New ReaLTaiizor.Controls.PoisonLabel()
-        CType(Me.PoisonStyleManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'PoisonStyleManager1
-        '
-        Me.PoisonStyleManager1.Owner = Me
         '
         'lblTitle
         '
@@ -55,7 +48,7 @@ Partial Class FrmLogin
         '
         '
         Me.txtUser.CustomButton.Image = Nothing
-        Me.txtUser.CustomButton.Location = New System.Drawing.Point(53, 1)
+        Me.txtUser.CustomButton.Location = New System.Drawing.Point(160, 1)
         Me.txtUser.CustomButton.Name = ""
         Me.txtUser.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtUser.CustomButton.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Blue
@@ -89,7 +82,7 @@ Partial Class FrmLogin
         '
         '
         Me.txtPass.CustomButton.Image = Nothing
-        Me.txtPass.CustomButton.Location = New System.Drawing.Point(53, 1)
+        Me.txtPass.CustomButton.Location = New System.Drawing.Point(160, 1)
         Me.txtPass.CustomButton.Name = ""
         Me.txtPass.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPass.CustomButton.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Blue
@@ -167,13 +160,10 @@ Partial Class FrmLogin
         Me.Controls.Add(Me.lblTitle)
         Me.Name = "FrmLogin"
         Me.Text = "FrmLogin"
-        CType(Me.PoisonStyleManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents PoisonStyleManager1 As ReaLTaiizor.Manager.PoisonStyleManager
     Friend WithEvents lblTitle As ReaLTaiizor.Controls.PoisonLabel
     Friend WithEvents btnClear As ReaLTaiizor.Controls.PoisonButton
     Friend WithEvents btnLogin As ReaLTaiizor.Controls.PoisonButton
