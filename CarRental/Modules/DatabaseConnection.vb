@@ -6,6 +6,8 @@ Public Module DatabaseConnection
     ' Keep the connection string in ONE place
     Public ReadOnly ConnectionString As String =
         "server=localhost;user=root;password=ChetanRootUser-PWD_Store-7729;database=db_car_rental;SslMode=none;"
+    Public ReadOnly Conn As String =
+        "server=localhost;user=root;password=ChetanRootUser-PWD_Store-7729;database=db_car_rental;SslMode=none;"
 
     ' For SELECT queries (returns DataTable)
     Public Function RunQuery(query As String,
