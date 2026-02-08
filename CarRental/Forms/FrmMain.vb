@@ -6,73 +6,70 @@ Imports MySql.Data.MySqlClient
 Public Class FrmMain
     Inherits PoisonForm
 
-    Private ReadOnly PoisonThemeStyle As Object
-    Private ReadOnly tileCust As Object
-
-    ' 1. CONSTRUCTOR: This runs BEFORE the form opens
+    ' 1. DEFINE MANAGER (Code-Only to prevent Designer bugs)
     Private _styleManager As PoisonStyleManager
 
     Public Sub New()
         InitializeComponent()
 
-        ' 2. CREATE IT MANUALLY IN CODE
-        ' This bypasses the "Requested value 'none'" error
-        _styleManager = New PoisonStyleManager(Me)
-
-        ' 3. FORCE THE SETTINGS
+        _styleManager = New PoisonStyleManager()   ' <- do NOT pass Me here
+        _styleManager.Owner = Me                   ' set owner explicitly
         _styleManager.Style = ColorStyle.Blue
         _styleManager.Theme = ThemeStyle.Light
-
-        ' 4. ASSIGN TO FORM
         Me.StyleManager = _styleManager
     End Sub
 
-    Public ReadOnly Property PoisonColorStyle As Object
-
-    ' 2. LOAD EVENT: Fetch the data
     Private Sub FrmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Just to be double safe, set it again on load
-        If Me.StyleManager Is Nothing Then
-            Me.StyleManager = _styleManager
-        End If
-
         LoadDashboardStats()
     End Sub
 
-    ' 3. DATA LOGIC
     Private Sub LoadDashboardStats()
         Try
-            ' Get Car Count (Ensure you check 'available' status)
+            ' 3. FETCH DATA SAFEGUARDS
+            ' We check if the connection is actually valid before running queries
+
+            ' Count Cars
             Dim dtCars As DataTable = DatabaseConnection.RunQuery("SELECT COUNT(*) FROM tbl_cars WHERE available='Yes'")
             If dtCars.Rows.Count > 0 Then
-                tileCars.TileCount = CInt(dtCars.Rows(0)(0))
+                ' We check if tileCars exists (it might not be created yet in some designer states)
+                If tileCust IsNot Nothing Then tileCust.TileCount = CInt(dtCars.Rows(0)(0))
             End If
 
-            ' Get Customer Count
+            ' Count Customers
             Dim dtCust As DataTable = DatabaseConnection.RunQuery("SELECT COUNT(*) FROM tbl_customers")
             If dtCust.Rows.Count > 0 Then
-                tileCust.TileCount = CInt(dtCust.Rows(0)(0))
+                If tileCust IsNot Nothing Then tileCust.TileCount = CInt(dtCust.Rows(0)(0))
             End If
 
-            ' Get Active Rentals (Rentals not yet returned)
+            ' Count Rentals
             Dim dtRent As DataTable = DatabaseConnection.RunQuery("SELECT COUNT(*) FROM tbl_rentals WHERE return_date IS NULL")
             If dtRent.Rows.Count > 0 Then
-                tileRentals.TileCount = CInt(dtRent.Rows(0)(0))
+                If tileRentals IsNot Nothing Then tileRentals.TileCount = CInt(dtRent.Rows(0)(0))
             End If
 
         Catch ex As Exception
-            ' If database fails, set to 0 to prevent crash
-            tileCars.TileCount = 0
-            tileCust.TileCount = 0
-            tileRentals.TileCount = 0
+            ' If stats fail, we simply show 0 instead of crashing the whole app
+            Console.WriteLine("Stats Error: " & ex.Message)
         End Try
     End Sub
 
-    ' 4. LOGOUT BUTTON
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnlogout.Click
         Dim f As New FrmLogin
         f.Show()
         Me.Close()
     End Sub
+    Private Sub tileCars_Click(sender As Object, e As EventArgs) Handles tileCars.Click
+        ' Open the Cars Management Form
+        Dim f As New FrmCars()
+        f.ShowDialog() ' ShowDialog means you can't click the dashboard until you close this form
 
+        ' Refresh stats when you come back (so the numbers update!)
+        LoadDashboardStats()
+    End Sub
+
+    Private Sub tileCust_Click(sender As Object, e As EventArgs) Handles tileCust.Click
+        Dim f As New FrmCustomers()
+        f.ShowDialog()
+        LoadDashboardStats() ' Refresh the "Total Customers" count when you return
+    End Sub
 End Class

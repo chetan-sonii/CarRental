@@ -26,11 +26,12 @@ Partial Class FrmMain
         Me.tabDashboard = New ReaLTaiizor.Controls.PoisonTabPage()
         Me.btnlogout = New ReaLTaiizor.Controls.PoisonButton()
         Me.tileRentals = New ReaLTaiizor.Controls.PoisonTile()
-        Me.PoisonTile1 = New ReaLTaiizor.Controls.PoisonTile()
         Me.tileCars = New ReaLTaiizor.Controls.PoisonTile()
-        Me.tabCars = New ReaLTaiizor.Controls.PoisonTabPage()
+        Me.tileCust = New ReaLTaiizor.Controls.PoisonTile()
         Me.tabCustomers = New ReaLTaiizor.Controls.PoisonTabPage()
+        Me.tabCars = New ReaLTaiizor.Controls.PoisonTabPage()
         Me.tabRentals = New ReaLTaiizor.Controls.PoisonTabPage()
+        Me.MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
         Me.PoisonTabControl1.SuspendLayout()
         Me.tabDashboard.SuspendLayout()
         Me.SuspendLayout()
@@ -38,8 +39,8 @@ Partial Class FrmMain
         'PoisonTabControl1
         '
         Me.PoisonTabControl1.Controls.Add(Me.tabDashboard)
-        Me.PoisonTabControl1.Controls.Add(Me.tabCars)
         Me.PoisonTabControl1.Controls.Add(Me.tabCustomers)
+        Me.PoisonTabControl1.Controls.Add(Me.tabCars)
         Me.PoisonTabControl1.Controls.Add(Me.tabRentals)
         Me.PoisonTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PoisonTabControl1.Location = New System.Drawing.Point(20, 60)
@@ -55,8 +56,8 @@ Partial Class FrmMain
         '
         Me.tabDashboard.Controls.Add(Me.btnlogout)
         Me.tabDashboard.Controls.Add(Me.tileRentals)
-        Me.tabDashboard.Controls.Add(Me.PoisonTile1)
         Me.tabDashboard.Controls.Add(Me.tileCars)
+        Me.tabDashboard.Controls.Add(Me.tileCust)
         Me.tabDashboard.HorizontalScrollbarBarColor = True
         Me.tabDashboard.HorizontalScrollbarHighlightOnWheel = False
         Me.tabDashboard.HorizontalScrollbarSize = 10
@@ -91,41 +92,27 @@ Partial Class FrmMain
         Me.tileRentals.Text = "Active Rentals"
         Me.tileRentals.UseSelectable = True
         '
-        'PoisonTile1
-        '
-        Me.PoisonTile1.ActiveControl = Nothing
-        Me.PoisonTile1.Location = New System.Drawing.Point(3, 3)
-        Me.PoisonTile1.Name = "PoisonTile1"
-        Me.PoisonTile1.Size = New System.Drawing.Size(200, 120)
-        Me.PoisonTile1.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Blue
-        Me.PoisonTile1.TabIndex = 2
-        Me.PoisonTile1.Text = "Available Cars"
-        Me.PoisonTile1.UseSelectable = True
-        '
         'tileCars
         '
         Me.tileCars.ActiveControl = Nothing
-        Me.tileCars.Location = New System.Drawing.Point(233, 3)
+        Me.tileCars.Location = New System.Drawing.Point(3, 3)
         Me.tileCars.Name = "tileCars"
-        Me.tileCars.Size = New System.Drawing.Size(150, 120)
-        Me.tileCars.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Green
+        Me.tileCars.Size = New System.Drawing.Size(200, 120)
+        Me.tileCars.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Blue
         Me.tileCars.TabIndex = 2
-        Me.tileCars.Text = "Available Customers"
+        Me.tileCars.Text = "Available Cars"
         Me.tileCars.UseSelectable = True
         '
-        'tabCars
+        'tileCust
         '
-        Me.tabCars.HorizontalScrollbarBarColor = True
-        Me.tabCars.HorizontalScrollbarHighlightOnWheel = False
-        Me.tabCars.HorizontalScrollbarSize = 10
-        Me.tabCars.Location = New System.Drawing.Point(4, 38)
-        Me.tabCars.Name = "tabCars"
-        Me.tabCars.Size = New System.Drawing.Size(752, 328)
-        Me.tabCars.TabIndex = 1
-        Me.tabCars.Text = "Cars"
-        Me.tabCars.VerticalScrollbarBarColor = True
-        Me.tabCars.VerticalScrollbarHighlightOnWheel = False
-        Me.tabCars.VerticalScrollbarSize = 10
+        Me.tileCust.ActiveControl = Nothing
+        Me.tileCust.Location = New System.Drawing.Point(233, 3)
+        Me.tileCust.Name = "tileCust"
+        Me.tileCust.Size = New System.Drawing.Size(150, 120)
+        Me.tileCust.Style = ReaLTaiizor.[Enum].Poison.ColorStyle.Green
+        Me.tileCust.TabIndex = 2
+        Me.tileCust.Text = "Available Customers"
+        Me.tileCust.UseSelectable = True
         '
         'tabCustomers
         '
@@ -141,6 +128,20 @@ Partial Class FrmMain
         Me.tabCustomers.VerticalScrollbarHighlightOnWheel = False
         Me.tabCustomers.VerticalScrollbarSize = 10
         '
+        'tabCars
+        '
+        Me.tabCars.HorizontalScrollbarBarColor = True
+        Me.tabCars.HorizontalScrollbarHighlightOnWheel = False
+        Me.tabCars.HorizontalScrollbarSize = 10
+        Me.tabCars.Location = New System.Drawing.Point(4, 38)
+        Me.tabCars.Name = "tabCars"
+        Me.tabCars.Size = New System.Drawing.Size(752, 328)
+        Me.tabCars.TabIndex = 1
+        Me.tabCars.Text = "Cars"
+        Me.tabCars.VerticalScrollbarBarColor = True
+        Me.tabCars.VerticalScrollbarHighlightOnWheel = False
+        Me.tabCars.VerticalScrollbarSize = 10
+        '
         'tabRentals
         '
         Me.tabRentals.HorizontalScrollbarBarColor = True
@@ -154,6 +155,13 @@ Partial Class FrmMain
         Me.tabRentals.VerticalScrollbarBarColor = True
         Me.tabRentals.VerticalScrollbarHighlightOnWheel = False
         Me.tabRentals.VerticalScrollbarSize = 10
+        '
+        'MySqlCommand1
+        '
+        Me.MySqlCommand1.CacheAge = 0
+        Me.MySqlCommand1.Connection = Nothing
+        Me.MySqlCommand1.EnableCaching = False
+        Me.MySqlCommand1.Transaction = Nothing
         '
         'FrmMain
         '
@@ -170,11 +178,12 @@ Partial Class FrmMain
     End Sub
     Friend WithEvents PoisonTabControl1 As ReaLTaiizor.Controls.PoisonTabControl
     Friend WithEvents tabDashboard As ReaLTaiizor.Controls.PoisonTabPage
-    Friend WithEvents tileCars As ReaLTaiizor.Controls.PoisonTile
+    Friend WithEvents tileCust As ReaLTaiizor.Controls.PoisonTile
     Friend WithEvents tabCars As ReaLTaiizor.Controls.PoisonTabPage
     Friend WithEvents tabCustomers As ReaLTaiizor.Controls.PoisonTabPage
     Friend WithEvents tabRentals As ReaLTaiizor.Controls.PoisonTabPage
-    Friend WithEvents PoisonTile1 As ReaLTaiizor.Controls.PoisonTile
+    Friend WithEvents tileCars As ReaLTaiizor.Controls.PoisonTile
     Friend WithEvents tileRentals As ReaLTaiizor.Controls.PoisonTile
     Friend WithEvents btnlogout As ReaLTaiizor.Controls.PoisonButton
+    Friend WithEvents MySqlCommand1 As MySql.Data.MySqlClient.MySqlCommand
 End Class
